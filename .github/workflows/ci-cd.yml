@@ -66,22 +66,22 @@ jobs:
           key: ${{ secrets.GCP_VM_SSH_KEY }}
           port: ${{ secrets.GCP_VM_PORT || '22' }}
           envs: FRONTEND_ENV_FILE
-          script_stop: true
           script: |
             set -euo pipefail
 
             APP_DIR="/opt/docuhub-frontend"
             NET_NAME="docuhub"
-            mkdir -p "$APP_DIR"
+            sudo mkdir -p "$APP_DIR"
+            sudo chown -R "$USER":"$USER" "$APP_DIR"
             tar -xzf /tmp/frontend-release.tgz -C "$APP_DIR"
             cd "$APP_DIR"
 
             printf "%s" "$FRONTEND_ENV_FILE" > .env
-            docker network inspect "$NET_NAME" >/dev/null 2>&1 || docker network create "$NET_NAME"
+            sudo docker network inspect "$NET_NAME" >/dev/null 2>&1 || sudo docker network create "$NET_NAME"
 
-            docker build -t docuhub-frontend:latest .
-            docker rm -f docuhub-frontend >/dev/null 2>&1 || true
-            docker run -d \
+            sudo docker build -t docuhub-frontend:latest .
+            sudo docker rm -f docuhub-frontend >/dev/null 2>&1 || true
+            sudo docker run -d \
               --name docuhub-frontend \
               --restart unless-stopped \
               --network "$NET_NAME" \
