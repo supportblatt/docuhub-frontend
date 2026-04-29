@@ -110,47 +110,47 @@ export const clients = [
 export const forms = [
   {
     formId: 'FORM-1247',
-    client: 'Sarah Mitchell',
+    client: 'Jordin Rose Mackay',
     email: 'sarah.mitchell@email.com',
-    type: 'SMSF + Corporate Trustee',
+    type: 'Company Establishment',
     status: 'Submitted',
     sent: 'April 23, 2026',
     due: 'May 7, 2026',
     activity: '2 hours ago',
-    staff: 'Alex Chen'
+    staff: 'Sarah'
   },
   {
     formId: 'FORM-1246',
-    client: 'David Thompson',
+    client: 'Robert Leslie Fraser',
     email: 'david.thompson@email.com',
-    type: 'SMSF + Corporate Trustee',
-    status: 'Viewed by Client',
+    type: 'SMSF Borrowing (Bare Trust)',
+    status: 'Needs Review',
     sent: 'April 22, 2026',
     due: 'May 6, 2026',
     activity: '5 hours ago',
-    staff: 'Emma Davis'
+    staff: 'Vanessa'
   },
   {
     formId: 'FORM-1245',
-    client: 'Jennifer Wong',
+    client: 'Melanie Elizabeth Dowling',
     email: 'jen.wong@email.com',
-    type: 'Individual Trustee',
+    type: 'SMSF Borrowing (Bare Trust)',
     status: 'In Progress',
     sent: 'April 21, 2026',
     due: 'May 5, 2026',
     activity: '1 day ago',
-    staff: 'Alex Chen'
+    staff: 'Lauren'
   },
   {
-    formId: 'FORM-1242',
-    client: 'James Wilson',
-    email: 'james.wilson@email.com',
-    type: 'Individual Trustee',
-    status: 'Form Sent',
+    formId: 'FORM-1244',
+    client: 'Tacy-Lee Taylor',
+    email: 'm.roberts@email.com',
+    type: 'SMSF + Corporate Trustee',
+    status: 'Ready to Forward',
     sent: 'April 20, 2026',
     due: 'May 4, 2026',
-    activity: '3 days ago',
-    staff: 'Alex Chen'
+    activity: '1 day ago',
+    staff: 'John'
   }
 ] as const;
 
