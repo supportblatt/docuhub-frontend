@@ -27,13 +27,13 @@ jobs:
         run: npm run lint
 
       - name: Create deployment bundle
-        run: tar -czf frontend-release.tgz --exclude=node_modules --exclude=.next --exclude=.git .
+        run: tar -czf /tmp/frontend-release.tgz --exclude=node_modules --exclude=.next --exclude=.git .
 
       - name: Upload deployment bundle
         uses: actions/upload-artifact@v4
         with:
           name: frontend-release
-          path: frontend-release.tgz
+          path: /tmp/frontend-release.tgz
 
   deploy:
     runs-on: ubuntu-latest
