@@ -88,3 +88,5 @@ jobs:
               --env-file .env \
               -p 127.0.0.1:3100:3100 \
               docuhub-frontend:latest
+
+            sudo docker image prune -af --filter "until=168h"
