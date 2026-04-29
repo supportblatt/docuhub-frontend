@@ -1,0 +1,52 @@
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { BadgeCheck, FileText, Folder, LayoutGrid, Send, Settings, Users, BarChart3 } from 'lucide-react';
+import { navItems } from '@/lib/mock-data';
+import { cn } from '@/lib/utils';
+import type { LucideIcon } from 'lucide-react';
+
+const iconByHref: Record<string, LucideIcon> = {
+  '/dashboard': LayoutGrid,
+  '/clients': Users,
+  '/forms': FileText,
+  '/submissions': Send,
+  '/abn-tracking': BadgeCheck,
+  '/documents': Folder,
+  '/reports': BarChart3,
+  '/settings': Settings
+};
+
+export function Sidebar() {
+  const pathname = usePathname();
+
+  return (
+    <aside className="hidden h-screen w-[240px] shrink-0 border-r border-[#dfe3ea] bg-white md:block">
+      <div className="border-b border-[#dfe3ea] px-5 py-6">
+        <h1 className="whitespace-nowrap text-[22px] font-semibold leading-none tracking-[-0.03em] text-[#0f172e]">Docuhub</h1>
+        <p className="mt-2 text-[12px] font-medium text-[#667085]">SMSF Application Manager</p>
+      </div>
+      <nav className="px-3 py-4">
+        {navItems.map((item) => {
+          const Icon = iconByHref[item.href] ?? LayoutGrid;
+          const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                'mb-1.5 flex items-center gap-3 rounded-[12px] px-4 py-3 text-[14px] font-medium transition',
+                active ? 'bg-[#e9eff8] text-[#2459dd]' : 'text-[#344054] hover:bg-[#f3f5f8]'
+              )}
+            >
+              <Icon className={cn('h-[18px] w-[18px]', active ? 'text-[#2459dd]' : 'text-[#344054]')} strokeWidth={2} />
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
+    </aside>
+  );
+}
