@@ -20,6 +20,12 @@ On push to `main`, GitHub Actions will:
 3. SSH into your Google Cloud VM.
 4. Rebuild and restart Docker container `docuhub-frontend`.
 
+Runtime topology on the VM:
+
+- public URL: `https://app.docuhub.com.au`
+- Caddy proxies `/` to frontend (`127.0.0.1:3000`)
+- Caddy proxies `/api/*` to backend (`127.0.0.1:4000`)
+
 ## Required GitHub Secrets
 
 - `GCP_VM_HOST`: VM external IP or DNS
@@ -33,5 +39,6 @@ On push to `main`, GitHub Actions will:
 - Docker installed
 - SSH key added to `~/.ssh/authorized_keys` for `GCP_VM_USER`
 - User can run Docker commands
+- Caddy installed on host
 
 Deployment target directory on VM: `/opt/docuhub-frontend`

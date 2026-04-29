@@ -72,17 +72,20 @@ jobs:
             set -euo pipefail
 
             APP_DIR="/opt/docuhub-frontend"
+            NET_NAME="docuhub"
             mkdir -p "$APP_DIR"
             tar -xzf /tmp/frontend-release.tgz -C "$APP_DIR"
             cd "$APP_DIR"
 
             printf "%s" "$FRONTEND_ENV_FILE" > .env
+            docker network inspect "$NET_NAME" >/dev/null 2>&1 || docker network create "$NET_NAME"
 
             docker build -t docuhub-frontend:latest .
             docker rm -f docuhub-frontend >/dev/null 2>&1 || true
             docker run -d \
               --name docuhub-frontend \
               --restart unless-stopped \
+              --network "$NET_NAME" \
               --env-file .env \
-              -p 3000:3000 \
+              -p 127.0.0.1:3000:3000 \
               docuhub-frontend:latest
