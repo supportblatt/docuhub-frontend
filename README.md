@@ -23,8 +23,8 @@ On push to `main`, GitHub Actions will:
 Runtime topology on the VM:
 
 - public URL: `https://app.docuhub.com.au`
-- Caddy proxies `/` to frontend (`127.0.0.1:3000`)
-- Caddy proxies `/api/*` to backend (`127.0.0.1:4000`)
+- Caddy proxies `/` to frontend (`127.0.0.1:3100`)
+- Caddy proxies `/api/*` to backend (`127.0.0.1:4100`)
 
 ## Required GitHub Secrets
 

@@ -87,5 +87,5 @@ jobs:
               --restart unless-stopped \
               --network "$NET_NAME" \
               --env-file .env \
-              -p 127.0.0.1:3000:3000 \
+              -p 127.0.0.1:3100:3100 \
               docuhub-frontend:latest
