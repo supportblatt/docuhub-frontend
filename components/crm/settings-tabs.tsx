@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useAuthUser } from '@/components/auth/auth-context';
 import { cn } from '@/lib/utils';
 
 const tabs = [
@@ -13,11 +14,14 @@ const tabs = [
 
 export function SettingsTabs() {
   const pathname = usePathname();
+  const user = useAuthUser();
+  const isAdmin = Boolean(user?.roleIsAdmin);
+  const visibleTabs = isAdmin ? tabs : tabs.filter((tab) => tab.href === '/settings/security');
 
   return (
     <div className="rounded-[16px] bg-[#eceef3] p-1.5">
-      <div className="grid gap-2 md:grid-cols-4">
-        {tabs.map((tab) => {
+      <div className={cn('grid gap-2', isAdmin ? 'md:grid-cols-4' : 'md:grid-cols-1')}>
+        {visibleTabs.map((tab) => {
           const active = pathname === tab.href;
 
           return (

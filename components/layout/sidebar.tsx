@@ -1,10 +1,12 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BadgeCheck, FileText, Folder, LayoutGrid, Send, Settings, Users, BarChart3 } from 'lucide-react';
-import { navItems } from '@/lib/mock-data';
+import { NAV_ITEMS } from '@/lib/nav';
 import { cn } from '@/lib/utils';
+import type { AuthUser } from '@/lib/auth-api';
 import type { LucideIcon } from 'lucide-react';
 
 const iconByHref: Record<string, LucideIcon> = {
@@ -18,13 +20,22 @@ const iconByHref: Record<string, LucideIcon> = {
   '/settings': Settings
 };
 
-export function Sidebar() {
+export function Sidebar({ user }: { user: AuthUser }) {
   const pathname = usePathname();
+  const allowed = new Set(user.accessibleNavItems);
+  const navItems = NAV_ITEMS.filter((item) => allowed.has(item.key));
 
   return (
     <aside className="hidden h-screen w-[240px] shrink-0 border-r border-[#dfe3ea] bg-white md:block">
       <div className="border-b border-[#dfe3ea] px-5 py-6">
-        <h1 className="whitespace-nowrap text-[22px] font-semibold leading-none tracking-[-0.03em] text-[#0f172e]">Docuhub</h1>
+        <Image
+          src="/docuhub-logo.png"
+          alt="Docuhub logo"
+          width={1018}
+          height={578}
+          className="h-auto w-[150px]"
+          priority
+        />
         <p className="mt-2 text-[12px] font-medium text-[#667085]">SMSF Application Manager</p>
       </div>
       <nav className="px-3 py-4">

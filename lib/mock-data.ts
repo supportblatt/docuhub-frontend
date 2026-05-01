@@ -1,13 +1,6 @@
-export const navItems = [
-  { label: 'Dashboard', href: '/dashboard' },
-  { label: 'Clients', href: '/clients' },
-  { label: 'Forms', href: '/forms' },
-  { label: 'Submissions', href: '/submissions' },
-  { label: 'ABN Tracking', href: '/abn-tracking' },
-  { label: 'Documents', href: '/documents' },
-  { label: 'Reports', href: '/reports' },
-  { label: 'Settings', href: '/settings' }
-] as const;
+import { NAV_ITEMS } from './nav';
+
+export const navItems = NAV_ITEMS.map(({ label, href }) => ({ label, href }));
 
 export const dashboardStats = [
   { label: 'Total Clients', value: '248', delta: '+12% this month' },
