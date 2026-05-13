@@ -26,7 +26,7 @@ export function Sidebar({ user }: { user: AuthUser }) {
   const navItems = NAV_ITEMS.filter((item) => allowed.has(item.key));
 
   return (
-    <aside className="hidden h-screen w-[240px] shrink-0 border-r border-[#dfe3ea] bg-white md:block">
+    <aside className="sticky top-0 hidden h-screen w-[240px] shrink-0 border-r border-[#dfe3ea] bg-white md:block">
       <div className="border-b border-[#dfe3ea] px-5 py-6">
         <Image
           src="/docuhub-logo.png"
@@ -40,8 +40,9 @@ export function Sidebar({ user }: { user: AuthUser }) {
       </div>
       <nav className="px-3 py-4">
         {navItems.map((item) => {
-          const Icon = iconByHref[item.href] ?? LayoutGrid;
-          const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+          const hrefPath = item.href.split('?')[0];
+          const Icon = iconByHref[hrefPath] ?? LayoutGrid;
+          const active = pathname === hrefPath || pathname.startsWith(`${hrefPath}/`);
 
           return (
             <Link

@@ -78,11 +78,13 @@ export function CrmStatusPill({
 export function CrmActionPill({
   label,
   href,
+  onClick,
   tone = 'neutral',
   icon
 }: {
   label: string;
-  href: string;
+  href?: string;
+  onClick?: (e: React.MouseEvent) => void;
   tone?: 'neutral' | 'blue' | 'purple' | 'orange' | 'teal';
   icon?: ReactNode;
 }) {
@@ -94,10 +96,21 @@ export function CrmActionPill({
     teal: 'border-[#7ce2d2] text-[#0f8f86] hover:bg-[#ecfbf8]'
   }[tone];
 
+  const className = cn('inline-flex items-center gap-1.5 rounded-[12px] border px-3 py-1.5 text-[12px] font-semibold transition cursor-pointer', toneClass);
+
+  if (onClick) {
+    return (
+      <button onClick={onClick} className={className}>
+        {icon}
+        {label}
+      </button>
+    );
+  }
+
   return (
     <Link
-      href={href}
-      className={cn('inline-flex items-center gap-1.5 rounded-[12px] border px-3 py-1.5 text-[12px] font-semibold transition', toneClass)}
+      href={href || '#'}
+      className={className}
     >
       {icon}
       {label}
@@ -183,6 +196,10 @@ export function CrmTh({ children, className }: { children: ReactNode; className?
   );
 }
 
-export function CrmTd({ children, className }: { children: ReactNode; className?: string }) {
-  return <td className={cn('border-b border-[#eceff4] px-4 py-3 text-[12px] text-[#111827]', className)}>{children}</td>;
+export function CrmTd({ children, className, ...props }: React.TdHTMLAttributes<HTMLTableCellElement>) {
+  return (
+    <td className={cn('border-b border-[#eceff4] px-4 py-3 text-[12px] text-[#111827]', className)} {...props}>
+      {children}
+    </td>
+  );
 }
