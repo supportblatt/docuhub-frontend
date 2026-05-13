@@ -1,6 +1,6 @@
 export const NAV_ITEMS = [
   { key: 'DASHBOARD', label: 'Dashboard', href: '/dashboard' },
-  { key: 'CLIENTS', label: 'Clients', href: '/clients' },
+  { key: 'CLIENTS', label: 'Leads/Clients', href: '/clients?tab=leads' },
   { key: 'FORMS', label: 'Forms', href: '/forms' },
   { key: 'SUBMISSIONS', label: 'Submissions', href: '/submissions' },
   { key: 'ABN_TRACKING', label: 'ABN Tracking', href: '/abn-tracking' },
@@ -13,7 +13,7 @@ export type NavItemKey = (typeof NAV_ITEMS)[number]['key'];
 
 export const NAV_KEY_BY_HREF_PREFIX: Array<{ key: NavItemKey; hrefPrefix: string }> = NAV_ITEMS.map((item) => ({
   key: item.key,
-  hrefPrefix: item.href
+  hrefPrefix: item.href.split('?')[0]
 }));
 
 export const NAV_HREF_BY_KEY = new Map<NavItemKey, string>(NAV_ITEMS.map((item) => [item.key, item.href]));
